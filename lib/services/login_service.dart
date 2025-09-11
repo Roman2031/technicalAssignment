@@ -9,7 +9,7 @@ class LoginService {
     try {
       final response = await _dio.post(
         'https://reqres.in/api/login',
-        options: Options(headers: {Headers.contentTypeHeader: Headers.jsonContentType, Headers.: 'reqres-free-v1'}),
+        options: Options(headers: {Headers.contentTypeHeader: Headers.jsonContentType, Headers.wwwAuthenticateHeader: 'reqres-free-v1'}),
         data: {'email': email, 'password': password},
       );
       print(response);
