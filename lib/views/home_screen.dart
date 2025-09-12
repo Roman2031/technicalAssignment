@@ -3,6 +3,7 @@ import 'package:technical_assignment/controllers/home_controller.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:technical_assignment/models/post_model.dart';
+import 'package:technical_assignment/routes/route.dart';
 
 class HomeScreen extends StatefulWidget { 
   final HomeController controller = Get.put(HomeController());  
@@ -43,20 +44,22 @@ class _HomeScreenState extends State<HomeScreen> {
           itemBuilder: (context, item, index) {
             final post = item as PostModel;
             return Card(
-              child: ListTile(
-                title: Row(
+              child: ListTile(onTap: () => {
+                RoutePage().goToPostDetailScreen(post: post)
+              },
+                title: Column(
                   children: [
                     Text('User Id: ${post.userId.toString()}'),
                     SizedBox(width: 10),
-                    Text('Id: ${post.id.toString()}'),
+                    Text('title: ${post.title.toString()}', style: TextStyle(fontWeight: FontWeight.bold)),
                   ],
                 ),
-                subtitle: Column(
-                  children: [
-                     Text('Title: ${post.title.toString()}', style: TextStyle(fontWeight: FontWeight.bold)),
-                    Text('Body: ${post.body.toString()}'),
-                  ],
-                ),
+                // subtitle: Column(
+                //   children: [
+                //      Text('Title: ${post.title.toString()}', style: TextStyle(fontWeight: FontWeight.bold)),
+                //     Text('Body: ${post.body.toString()}'),
+                //   ],
+                // ),
               ),
             );
           },
