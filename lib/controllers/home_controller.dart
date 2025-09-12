@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:technical_assignment/models/post_model.dart';
 import 'package:technical_assignment/services/home_services.dart';

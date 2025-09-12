@@ -5,15 +5,15 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:technical_assignment/models/post_model.dart';
 import 'package:technical_assignment/routes/route.dart';
 
-class HomeScreen extends StatefulWidget { 
+class ArticalListScreen extends StatefulWidget { 
   final HomeController controller = Get.put(HomeController());  
-   HomeScreen({super.key});
+   ArticalListScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<ArticalListScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<ArticalListScreen> {
   List<PostModel> postList = []; 
   @override
   Widget build(BuildContext context) {

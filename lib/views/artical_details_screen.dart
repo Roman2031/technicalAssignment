@@ -7,14 +7,14 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:dio/dio.dart';
 
-class PostDetailScreen extends StatefulWidget {
+class ArticalDetailsScreen extends StatefulWidget {
 PostModel post;
-   PostDetailScreen({super.key, required this.post});
+   ArticalDetailsScreen({super.key, required this.post});
 
   @override
-  State<PostDetailScreen> createState() => _PostDetailsScreenState();
+  State<ArticalDetailsScreen> createState() => _PostDetailsScreenState();
 }
-class _PostDetailsScreenState extends State<PostDetailScreen> {
+class _PostDetailsScreenState extends State<ArticalDetailsScreen> {
   ValueNotifier downloadProgressNotifier = ValueNotifier(0);
   @override
   Widget build(BuildContext context) {
