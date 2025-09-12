@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         postList = values;
          widget.controller.pagingController.refresh();        
-        print('refesh page with posts list length: ${values.length}');
+        print('refresh page with posts list length: ${values.length}');
       });
     });
           return Future<void>.delayed(Duration(seconds: 2));
