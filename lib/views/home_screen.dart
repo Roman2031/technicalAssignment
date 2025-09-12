@@ -13,58 +13,57 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<PostModel> postList = [];
-  @override
-  void initState(){     
-    widget.controller.postList().then((values) {
-      if (!mounted) return;
-      setState(() {
-        print('posts length: ${values.length}');
-        postList = values;
-      });
-    });
-    // TODO: implement initState
-    super.initState();
-  }
-   @override
-  void dispose() {
-    super.dispose();
-  }
+  List<PostModel> postList = []; 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
       ),
-      body: PagingListener(
-    controller: widget.controller.pagingController,
-    builder: (context, state, fetchNextPage) => PagedListView<int, dynamic>(
-      state: state,
-      fetchNextPage: fetchNextPage,
-      builderDelegate: PagedChildBuilderDelegate(
-        itemBuilder: (context, item, index) {
-          final post = item as PostModel;
-          return Card(
-            child: ListTile(
-              title: Row(
-                children: [
-                  Text('User Id: ${post.userId.toString()}'),
-                  SizedBox(width: 10),
-                  Text('Id: ${post.id.toString()}'),
-                ],
-              ),
-              subtitle: Column(
-                children: [
-                   Text('Title: ${post.title.toString()}', style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text('Body: ${post.body.toString()}'),
-                ],
-              ),
-            ),
-          );
+      body: RefreshIndicator(
+        color: Colors.white,
+        backgroundColor: Colors.blue,
+        onRefresh: () async {
+        widget.controller.postList().then((values) {
+      if (!mounted) return;
+      setState(() {
+        postList = values;
+         widget.controller.pagingController.refresh();        
+        print('refesh page with posts list length: ${values.length}');
+      });
+    });
+          return Future<void>.delayed(Duration(seconds: 2));
         },
+        child: PagingListener(
+            controller: widget.controller.pagingController,
+            builder: (context, state, fetchNextPage) => PagedListView<int, dynamic>(
+        state: state,
+        fetchNextPage: fetchNextPage,
+        builderDelegate: PagedChildBuilderDelegate(
+          itemBuilder: (context, item, index) {
+            final post = item as PostModel;
+            return Card(
+              child: ListTile(
+                title: Row(
+                  children: [
+                    Text('User Id: ${post.userId.toString()}'),
+                    SizedBox(width: 10),
+                    Text('Id: ${post.id.toString()}'),
+                  ],
+                ),
+                subtitle: Column(
+                  children: [
+                     Text('Title: ${post.title.toString()}', style: TextStyle(fontWeight: FontWeight.bold)),
+                    Text('Body: ${post.body.toString()}'),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+            ),
+            ),
       ),
-    ),
-    ),
     );
   }
 }
