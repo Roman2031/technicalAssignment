@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:technical_assignment/models/user_model.dart';
 import 'package:technical_assignment/services/login_service.dart';
 
 
@@ -23,7 +24,8 @@ class LoginController extends GetxController {
 
     try {
       final loginService = LoginService();
-      final token = await loginService.login(email, password);
+      var userInfo = UserModel(email: email, password: password);
+      final token = await loginService.login(userModel: userInfo);
 
       if (token != null) {
         final prefs = await SharedPreferences.getInstance();

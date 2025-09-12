@@ -1,25 +1,38 @@
+import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
-import 'dart:io';
+import 'package:technical_assignment/models/user_model.dart';
+import 'package:technical_assignment/utils/global.dart';
 
 class LoginService {
-   final Dio _dio = Dio();
+   Dio dio = Dio();
+  String urlLink = "${Global.endPoint}login";
 
-  Future<String?> login(String email, String password) async {
-    try {
-      final response = await _dio.post(
-        'https://reqres.in/api/login',
-        options: Options(headers: {Headers.contentTypeHeader: Headers.jsonContentType, Headers.wwwAuthenticateHeader: 'reqres-free-v1'}),
-        data: {'email': email, 'password': password},
-      );
-      print(response);
-      if (response.statusCode == 200 && response.data['reqres-free-v1'] != null) {
-        return response.data['reqres-free-v1'];
+  Future<String?> login({required UserModel userModel}) async {
+       dio.options.contentType = Headers.formUrlEncodedContentType;
+        dio.options = BaseOptions(
+        baseUrl: urlLink,
+        connectTimeout: Duration(milliseconds: 5000),
+        receiveTimeout: Duration(milliseconds: 3000),
+        contentType: Headers.jsonContentType,
+        headers: {'x-api-key': 'reqres-free-v1'});
+
+        var dataParam = jsonEncode({
+      'email': userModel.email,
+      'password': userModel.password,
+    });
+      try {
+      Response response =
+          await dio.post(Uri.encodeFull(urlLink), data: dataParam);
+      if (response.statusCode == 200) {
+        Map<String, dynamic> data = response.data;
+        var result = data["token"];
+        return result;
+      } else {
+        throw Exception("Error");
       }
-
-      return null;
-    } on DioException catch (e) {
-      throw Exception('Login failed: ${e.response?.data['error'] ?? e.message}');
+    } catch (error, stackTrace) {
+      print("Exception occurred: $error  stackTrace: $stackTrace");
+      return throw Exception("Error");
     }
   }
 }
