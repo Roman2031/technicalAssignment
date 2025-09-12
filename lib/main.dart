@@ -21,8 +21,7 @@ class MyApp extends StatelessWidget {
     token = getStorage.read('token');
     return GetMaterialApp(
       initialRoute: '/',
-      home: token != null ? HomeScreen() : LoginScreen(),
-      getPages: appRoutes(),
+      getPages: appRoutes(token: token),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -7,7 +7,5 @@ class UserModel {
    required this.password,
   });
   String email;
-  String password;
-
-  
+  String password;  
 }

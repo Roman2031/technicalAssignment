@@ -11,8 +11,6 @@ class LoginService {
        dio.options.contentType = Headers.formUrlEncodedContentType;
         dio.options = BaseOptions(
         baseUrl: urlLink,
-        connectTimeout: Duration(milliseconds: 5000),
-        receiveTimeout: Duration(milliseconds: 3000),
         contentType: Headers.jsonContentType,
         headers: {'x-api-key': 'reqres-free-v1'});
 
