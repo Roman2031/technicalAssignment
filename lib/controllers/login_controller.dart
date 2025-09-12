@@ -3,11 +3,13 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:technical_assignment/models/user_model.dart';
 import 'package:technical_assignment/services/login_service.dart';
-
+import 'package:technical_assignment/routes/route.dart';
+import 'package:get_storage/get_storage.dart';
 
 class LoginController extends GetxController {
   final emailController = TextEditingController(text: 'eve.holt@reqres.in');
   final passwordController = TextEditingController(text: 'cityslicka');
+  final RoutePage route = RoutePage();
 
   var isLoading = false.obs;
 
@@ -28,10 +30,11 @@ class LoginController extends GetxController {
       final token = await loginService.login(userModel: userInfo);
 
       if (token != null) {
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setString('reqres-free-v1', token);
+        final getStorage = GetStorage();
+        getStorage.write('token', token);
+        route.goToHomeScreen();
 
-        Get.snackbar('Success', 'Login successful! Token saved.');
+        Get.snackbar('Success', 'Token: $token stored successfully');
       } else {
         Get.snackbar('Error', 'Invalid credentials');
       }
