@@ -1,5 +1,4 @@
+import 'package:get/get.dart';
 
-class Global {
- static String endPoint ="https://reqres.in/api/";
+ String endPoint ="https://reqres.in/api/";
   
-}

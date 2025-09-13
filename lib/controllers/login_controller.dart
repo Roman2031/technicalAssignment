@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:technical_assignment/models/user_model.dart';
 import 'package:technical_assignment/services/login_service.dart';
 import 'package:technical_assignment/routes/route.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:technical_assignment/routes/route.dart';
 
 class LoginController extends GetxController {
   final emailController = TextEditingController(text: 'eve.holt@reqres.in');
   final passwordController = TextEditingController(text: 'cityslicka');
-  final RoutePage route = RoutePage();
 
   var isLoading = false.obs;
 
@@ -33,7 +30,7 @@ class LoginController extends GetxController {
       if (token != null) {
         final getStorage = GetStorage();
         getStorage.write('token', token);
-        route.goToArticalListScreen();
+        Navigate.goToArticleListScreen();
 
         Get.snackbar('Success', 'Token: $token stored successfully');
       } else {

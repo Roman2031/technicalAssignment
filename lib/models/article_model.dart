@@ -1,12 +1,12 @@
-class PostModel{  
+class ArticleModel{  
    int? userId;
    int? id;   
    String? title;
    String? body;
-  PostModel(this.id,this.userId,this.title,this.body);
+  ArticleModel(this.id,this.userId,this.title,this.body);
 
-  factory PostModel.fromJson(dynamic json) {
-    return PostModel(      
+  factory ArticleModel.fromJson(dynamic json) {
+    return ArticleModel(      
       json['userId'] as int?,
       json['id'] as int?,
       json['title'] as String?,

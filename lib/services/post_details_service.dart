@@ -7,7 +7,8 @@ import 'package:technical_assignment/utils/global.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:path_provider/path_provider.dart';
 
-downloadFileFromServer() async {
+class ArticalServices{
+  Future<void> downloadFileFromServer() async {
   ValueNotifier downloadProgressNotifier = ValueNotifier(0);
     Directory directory = Directory("");
     if (Platform.isAndroid) {
@@ -23,3 +24,4 @@ downloadFileFromServer() async {
     });
     print('File downloaded at ${directory.path}/samplePDF.pdf');
   }
+}

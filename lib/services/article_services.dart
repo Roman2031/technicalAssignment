@@ -1,12 +1,13 @@
-import 'dart:convert';
-import 'package:dio/dio.dart';
-import 'package:technical_assignment/models/post_model.dart';
 
-class ArticalServices {
+// ignore: depend_on_referenced_packages
+import 'package:dio/dio.dart';
+import 'package:technical_assignment/models/article_model.dart';
+
+class ArticleServices {
    Dio dio = Dio();
   String urlLink = 'https://jsonplaceholder.typicode.com/posts';
   
-  Future<List<PostModel>> postList() async {
+  Future<List<ArticleModel>> postList() async {
        dio.options.contentType = Headers.formUrlEncodedContentType;
         dio.options = BaseOptions(
         baseUrl: urlLink,
@@ -16,8 +17,8 @@ class ArticalServices {
           await dio.get(Uri.encodeFull(urlLink));
       if (response.statusCode == 200) {
        var result = response.data as List;
-      List<PostModel> listData =
-          result.map((tagJson) => PostModel.fromJson(tagJson)).toList();
+      List<ArticleModel> listData =
+          result.map((tagJson) => ArticleModel.fromJson(tagJson)).toList();
       return listData;
       } else {
         throw Exception("Error");

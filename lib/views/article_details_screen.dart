@@ -1,27 +1,26 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:technical_assignment/models/post_model.dart';
+import 'package:technical_assignment/models/article_model.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:dio/dio.dart';
+import 'package:technical_assignment/utils/appbar.dart';
 
-class ArticalDetailsScreen extends StatefulWidget {
-PostModel post;
-   ArticalDetailsScreen({super.key, required this.post});
+class ArticleDetailsScreen extends StatefulWidget {
+ArticleModel article;
+   ArticleDetailsScreen({super.key, required this.article});
 
   @override
-  State<ArticalDetailsScreen> createState() => _PostDetailsScreenState();
+  State<ArticleDetailsScreen> createState() => _PostDetailsScreenState();
 }
-class _PostDetailsScreenState extends State<ArticalDetailsScreen> {
+class _PostDetailsScreenState extends State<ArticleDetailsScreen> {
   ValueNotifier downloadProgressNotifier = ValueNotifier(0);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Post Details'),
-      ),
+      appBar: customAppBar(title:'Post Details',showSettings: true),
       body: Padding(
         padding: EdgeInsets.only(left:8,right: 8),
         child: Center(
@@ -29,12 +28,12 @@ class _PostDetailsScreenState extends State<ArticalDetailsScreen> {
             children: [
               Column(
                     children: [
-                      Text('User Id: ${widget.post.userId.toString()}'),
-                      Text('Id: ${widget.post.id.toString()}'),
+                      Text('User Id: ${widget.article.userId.toString()}'),
+                      Text('Id: ${widget.article.id.toString()}'),
                       SizedBox(height: 10),
-                      Text('${widget.post.title.toString()}', style: TextStyle(fontWeight: FontWeight.bold)),
+                      Text('${widget.article.title.toString()}', style: TextStyle(fontWeight: FontWeight.bold)),
                       SizedBox(height: 10),
-                      Text('${widget.post.body.toString()}',textAlign: TextAlign.justify),
+                      Text('${widget.article.body.toString()}',textAlign: TextAlign.justify),
                       SizedBox(height: 10), 
                       ElevatedButton(
                     onPressed: () {
