@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:technical_assignment/controllers/home_controller.dart';
+import 'package:technical_assignment/controllers/artical_controller.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:technical_assignment/models/post_model.dart';
 import 'package:technical_assignment/routes/route.dart';
 
 class ArticalListScreen extends StatefulWidget { 
-  final HomeController controller = Get.put(HomeController());  
+  final ArticalController controller = Get.put(ArticalController());  
+  final RoutePage route = RoutePage();
    ArticalListScreen({super.key});
 
   @override
@@ -45,13 +46,14 @@ class _HomeScreenState extends State<ArticalListScreen> {
             final post = item as PostModel;
             return Card(
               child: ListTile(onTap: () => {
-                RoutePage().goToPostDetailScreen(post: post)
+                widget.route.goToPostDetailScreen(post: post)
               },
                 title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('User Id: ${post.userId.toString()}'),
                     SizedBox(width: 10),
-                    Text('title: ${post.title.toString()}', style: TextStyle(fontWeight: FontWeight.bold)),
+                    Text('${post.title.toString()}', style: TextStyle(fontWeight: FontWeight.bold)),
                   ],
                 ),
                 // subtitle: Column(

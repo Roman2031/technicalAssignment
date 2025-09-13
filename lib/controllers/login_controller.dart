@@ -5,6 +5,7 @@ import 'package:technical_assignment/models/user_model.dart';
 import 'package:technical_assignment/services/login_service.dart';
 import 'package:technical_assignment/routes/route.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:technical_assignment/routes/route.dart';
 
 class LoginController extends GetxController {
   final emailController = TextEditingController(text: 'eve.holt@reqres.in');
@@ -32,7 +33,7 @@ class LoginController extends GetxController {
       if (token != null) {
         final getStorage = GetStorage();
         getStorage.write('token', token);
-        route.goToHomeScreen();
+        route.goToArticalListScreen();
 
         Get.snackbar('Success', 'Token: $token stored successfully');
       } else {

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:technical_assignment/models/post_model.dart';
 
-class HomeServices {
+class ArticalServices {
    Dio dio = Dio();
   String urlLink = 'https://jsonplaceholder.typicode.com/posts';
   
