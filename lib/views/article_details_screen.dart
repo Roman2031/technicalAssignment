@@ -3,25 +3,29 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:technical_assignment/controllers/artical_controller.dart';
 import 'package:technical_assignment/models/article_model.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
 import 'package:technical_assignment/utils/appbar.dart';
 
 class ArticleDetailsScreen extends StatefulWidget {
 ArticleModel article;
    ArticleDetailsScreen({super.key, required this.article});
+     
 
   @override
   State<ArticleDetailsScreen> createState() => _PostDetailsScreenState();
 }
 class _PostDetailsScreenState extends State<ArticleDetailsScreen> {
   ValueNotifier downloadProgressNotifier = ValueNotifier(0);
+  final ArticleController controller = Get.put(ArticleController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title:'Post Details',showSettings: true),
+      appBar: customAppBar(title:controller.articleDetailText,showSettings: true),
       body: Padding(
         padding: EdgeInsets.only(left:8,right: 8),
         child: Center(

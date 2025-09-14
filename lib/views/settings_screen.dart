@@ -1,4 +1,4 @@
-// ignore_for_file: depend_on_referenced_packages, prefer_const_constructors_in_immutables, avoid_print
+// ignore_for_file: depend_on_referenced_packages, prefer_const_constructors_in_immutables, avoid_print, unnecessary_string_interpolations
 import 'package:flutter/material.dart';
 import 'package:technical_assignment/controllers/settings_controller.dart';
 import 'package:get/get.dart';
@@ -16,53 +16,50 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   SettingsController controller = Get.put(SettingsController());
   Global global = Global();
-  GetStorage getStorage = GetStorage();
-
-  @override
-  void initState() {
-    super.initState();
-    controller.isDarkMode.value = getStorage.read('isDarkMode') ?? false;
-    controller.isBangla.value = getStorage.read('isBangla') ?? false;
-    setState(() {
-      controller.translateToBangla(text: controller.settingsText);
-    });
-  }
+  GetStorage getStorage = GetStorage(); 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(title: controller.settingsText, showSettings: false),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Obx(
-              () => SwitchListTile(
-                activeThumbColor: Colors.teal,
-                title: Text('Dark Mode'),
-                value: controller.isDarkMode.value,
-                onChanged: (value) {
-                  controller.onDarkModeChanged(value);
-                },
-              ),
-            ),
-            Obx(
-              () => SwitchListTile(
-                activeThumbColor: Colors.teal,
-                title: Text('Bangla'),
-                value: controller.isBangla.value,
-                onChanged: (value) {
-                  controller.onLanguageChanged(value);
-                    setState(() {
-                      controller.translateToBangla(
-                        text: controller.settingsText,
-                      );
-                  });
-                },
-              ),
-            ),
-          ],
-        ),
+        child: Obx(() {
+          if (controller.isloading.value) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(),
+              ],
+            ); // Show loader
+          } else { 
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Obx(
+                  () => SwitchListTile(
+                    activeThumbColor: Colors.teal,
+                    title: Obx(() => Text('${controller.darkModeText}')),
+                    value: controller.isDarkMode.value,
+                    onChanged: (value) {
+                      controller.onDarkModeChanged(value);
+                    },
+                  ),
+                ),
+                Obx(
+                  () => SwitchListTile(
+                    activeThumbColor: Colors.teal,
+                    title: Obx(() => Text('${controller.languageText}')),
+                    value: controller.isBangla.value,
+                    onChanged: (value) {
+                      controller.onLanguageChanged(value);
+                    },
+                  ),
+                ),
+              ],
+            );
+          }
+        }),
       ),
     );
   }

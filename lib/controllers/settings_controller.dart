@@ -2,15 +2,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:technical_assignment/services/translate_service.dart';
+import 'package:technical_assignment/utils/global.dart';
 
 class SettingsController extends GetxController {
+  Global global = Global();
   RxBool isDarkMode = false.obs;
   RxBool isBangla = false.obs;
-  
+  RxBool isloading = true.obs;
 
   //text variables
-  String settingsText = "Settings";
+  var settingsText = "Settings".obs;
+  var darkModeText = "Dark Mode".obs;
+  var languageText = "Bangla".obs;
 
   final getStorage = GetStorage();
 
@@ -24,22 +27,38 @@ class SettingsController extends GetxController {
     }
   }
 
-  void onLanguageChanged(bool value) {
-    isBangla.value = value;
-    getStorage.write('isBangla', value);    
-  } 
-
-  Future<void> translateToBangla({required String text}) async {    
-    TranslateService translateService = TranslateService();    
-    if (isBangla.value == false)
-    return translateService.translateToBangla(text: text).then( (value) {
-        settingsText = value;
-    });
-    else
-     return translateService.translateToEnglish(text: text).then( (value) {
-        settingsText = value;   
-    });
+  @override
+  void onInit() {
+    super.onInit();
+    init();
   }
 
-  
+  Future<void> init() async {
+    isDarkMode.value = getStorage.read('isDarkMode') ?? false;
+    isBangla.value = getStorage.read('isBangla') ?? false;
+    global.translator(rxString: settingsText);
+    global.translator(rxString: darkModeText);
+    if (isBangla.value) {
+      languageText.value = "English";
+      languageText = await global.translator(rxString: languageText);
+    } else {
+      languageText.value = "Bangla";
+      languageText = await global.translator(rxString: languageText);
+    }
+    isloading.value = false;
+  }
+
+  Future<void> onLanguageChanged(bool value) async {
+    isBangla.value = value;
+    getStorage.write('isBangla', value);
+    settingsText = await global.translator(rxString: settingsText);
+    darkModeText = await global.translator(rxString: darkModeText);
+    if (isBangla.value) {
+      languageText.value = "English";
+      languageText = await global.translator(rxString: languageText);
+    } else {
+      languageText.value = "Bangla";
+      languageText = await global.translator(rxString: languageText);
+    }
+  }
 }

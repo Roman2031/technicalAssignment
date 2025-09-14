@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
-class ArticalServices{
+class ArticleDetailsServices{
   Future<void> downloadFileFromServer() async {
   ValueNotifier downloadProgressNotifier = ValueNotifier(0);
     Directory directory = Directory("");

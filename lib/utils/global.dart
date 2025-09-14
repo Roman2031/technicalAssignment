@@ -2,18 +2,22 @@
 import 'package:technical_assignment/services/translate_service.dart';
 import 'package:translator/translator.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:get/get.dart';
 
 class Global {
   static String endPoint = "https://reqres.in/api/";
 
-  Future<String> translateToBangla({required String text}) {
+  Future<RxString> translator({required RxString rxString}) async {
     TranslateService translateService = TranslateService();
     final getStorage = GetStorage();
-    bool isBangla = getStorage.read('isBangla') ?? false;
-
-    if (isBangla)
-    return translateService.translateToEnglish(text: text);
+    if (getStorage.read('isBangla') ?? false)
+      translateService.translateToBangla(text: rxString.value).then((value) {
+        rxString.value = value;
+      });
     else
-    return Future.value(text);
+      translateService.translateToEnglish(text: rxString.value).then((value) {
+        rxString.value = value;
+      });
+    return rxString;
   }
 }

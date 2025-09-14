@@ -1,4 +1,4 @@
-// ignore_for_file: depend_on_referenced_packages, must_be_immutable,avoid_print
+// ignore_for_file: depend_on_referenced_packages, prefer_const_constructors_in_immutables, avoid_print, unnecessary_string_interpolations
 import 'package:flutter/material.dart';
 import 'package:technical_assignment/controllers/artical_controller.dart';
 import 'package:get/get.dart';
@@ -8,7 +8,6 @@ import 'package:technical_assignment/routes/navigate_route.dart';
 import 'package:technical_assignment/utils/appbar.dart';
 
 class ArticalListScreen extends StatefulWidget {
-  final ArticalController controller = Get.put(ArticalController());
   ArticalListScreen({super.key});
 
   @override
@@ -16,27 +15,28 @@ class ArticalListScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<ArticalListScreen> {
-  List<ArticleModel> postList = [];
+  List<ArticleModel> postList = [];  
+  final ArticleController controller = Get.put(ArticleController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: customAppBar(title: 'Home', showSettings: true)),
+      appBar: AppBar(title: customAppBar(title: controller.homeText, showSettings: true)),
       body: RefreshIndicator(
         color: Colors.white,
         backgroundColor: Colors.blue,
         onRefresh: () async {
-          widget.controller.postList().then((values) {
+          controller.articleList().then((values) {
             if (!mounted) return;
             setState(() {
               postList = values;
-              widget.controller.pagingController.refresh();
+              controller.pagingController.refresh();
               print('refresh page with posts list length: ${values.length}');
             });
           });
           return Future<void>.delayed(Duration(seconds: 2));
         },
         child: PagingListener(
-          controller: widget.controller.pagingController,
+          controller: controller.pagingController,
           builder: (context, state, fetchNextPage) =>
               PagedListView<int, dynamic>(
                 state: state,

@@ -6,7 +6,7 @@ class ArticleServices {
    Dio dio = Dio();
   String urlLink = 'https://jsonplaceholder.typicode.com/posts';
   
-  Future<List<ArticleModel>> postList() async {
+  Future<List<ArticleModel>> articleList() async {
        dio.options.contentType = Headers.formUrlEncodedContentType;
         dio.options = BaseOptions(
         baseUrl: urlLink,
