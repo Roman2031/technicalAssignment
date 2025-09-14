@@ -1,10 +1,8 @@
+// ignore_for_file: depend_on_referenced_packages, must_be_immutable,avoid_print
 import 'package:flutter/material.dart';
-// ignore: depend_on_referenced_packages
 import 'package:get/get.dart';
-// ignore: depend_on_referenced_packages
 import 'package:get_storage/get_storage.dart';
 import 'package:technical_assignment/routes/all_routes.dart';
-import 'package:technical_assignment/utils/global.dart';
 
 
 void main() async {
@@ -17,13 +15,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final getStorage = GetStorage();
-    String? token;
-    token = getStorage.read('token');
     bool isDarkModeTheme = getStorage.read('isDarkMode') ?? false;
     return GetMaterialApp(
       theme: isDarkModeTheme == true ? ThemeData.dark() : ThemeData.light(),
       initialRoute: '/',
-      getPages: allRoutes(token: token),
+      getPages: allRoutes(token: getStorage.read('token')),
       debugShowCheckedModeBanner: false,
     );
   }

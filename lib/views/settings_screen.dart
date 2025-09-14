@@ -1,9 +1,10 @@
+// ignore_for_file: depend_on_referenced_packages, prefer_const_constructors_in_immutables
 import 'package:flutter/material.dart';
 import 'package:technical_assignment/controllers/settings_controller.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:technical_assignment/utils/appbar.dart';
-import 'package:get_storage/get_storage.dart';
+
 
 class SettingsScreen extends StatefulWidget {
   SettingsScreen({super.key});
@@ -21,6 +22,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     super.initState();
     // ✅ Called once when the widget is created
     controller.isDarkMode.value = getStorage.read('isDarkMode') ?? false;
+    // ignore: avoid_print
     print("Widget initialized!");
   }
 
@@ -38,23 +40,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 title: Text('Dark Mode'),
                 value: controller.isDarkMode.value,
                 onChanged: (value) {
-                  controller.isDarkMode.value = value;
-                  if (value) {
-                    Get.changeTheme(ThemeData.dark());
-                  } else {
-                    Get.changeTheme(ThemeData.light());
-                  }
-                  getStorage.write('isDarkMode', value);
+                  controller.onDarkModeChanged(value);
                 },
               ),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                controller.logout();
-              },
-              child: Text('Logout'),
-            ),
+            ),            
           ],
         ),
       ),

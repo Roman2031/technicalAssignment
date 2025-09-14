@@ -1,10 +1,7 @@
-import 'dart:convert';
+// ignore_for_file: depend_on_referenced_packages, must_be_immutable,avoid_print
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:technical_assignment/models/user_model.dart';
-import 'package:technical_assignment/utils/global.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 import 'package:path_provider/path_provider.dart';
 
 class ArticalServices{

@@ -1,4 +1,4 @@
-import 'dart:convert';
+// ignore_for_file: depend_on_referenced_packages, must_be_immutable,avoid_print
 import 'package:dio/dio.dart';
 
 class SetingsService {

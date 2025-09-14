@@ -1,5 +1,4 @@
-
-// ignore: depend_on_referenced_packages
+// ignore_for_file: depend_on_referenced_packages, must_be_immutable,avoid_print
 import 'package:dio/dio.dart';
 import 'package:technical_assignment/models/article_model.dart';
 

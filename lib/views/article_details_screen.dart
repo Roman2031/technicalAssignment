@@ -1,8 +1,9 @@
+// ignore_for_file: depend_on_referenced_packages, must_be_immutable,avoid_print
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:technical_assignment/models/article_model.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:dio/dio.dart';
@@ -31,9 +32,9 @@ class _PostDetailsScreenState extends State<ArticleDetailsScreen> {
                       Text('User Id: ${widget.article.userId.toString()}'),
                       Text('Id: ${widget.article.id.toString()}'),
                       SizedBox(height: 10),
-                      Text('${widget.article.title.toString()}', style: TextStyle(fontWeight: FontWeight.bold)),
+                      Text(widget.article.title.toString(), style: TextStyle(fontWeight: FontWeight.bold)),
                       SizedBox(height: 10),
-                      Text('${widget.article.body.toString()}',textAlign: TextAlign.justify),
+                      Text(widget.article.body.toString(),textAlign: TextAlign.justify),
                       SizedBox(height: 10), 
                       ElevatedButton(
                     onPressed: () {
@@ -85,7 +86,7 @@ class _PostDetailsScreenState extends State<ArticleDetailsScreen> {
       ),
     );
   }
-downloadFileFromServer() async {  
+void downloadFileFromServer() async {  
     Directory directory = Directory("");
     if (Platform.isAndroid) {
       directory = (await getExternalStorageDirectory())!;
