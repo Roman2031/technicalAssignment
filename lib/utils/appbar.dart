@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:technical_assignment/routes/route.dart';
+import 'package:technical_assignment/routes/navigate_route.dart';
 
 AppBar customAppBar({required String title, required bool showSettings}) {
   return AppBar(
@@ -10,7 +10,7 @@ AppBar customAppBar({required String title, required bool showSettings}) {
         Text(title),
         showSettings == true ? GestureDetector(
           child: Text('Settings'),
-          onTap: () => {Navigate.goToSettingsScreen()},
+          onTap: () => {NavigateRoute.goToSettingsScreen()},
         ): SizedBox.shrink(),
       ],
     ),

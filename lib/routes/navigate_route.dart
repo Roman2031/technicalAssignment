@@ -1,9 +1,11 @@
 import 'package:get/get.dart';
 import 'package:technical_assignment/models/article_model.dart';
-class Navigate {
-  // Use a static method to perform navigation
+class NavigateRoute {
+  static void goToLoginScreen() {
+    Get.offAllNamed("/LoginScreen");
+  }
  static void goToArticleListScreen() {
-    Get.toNamed("/ArticalListScreen");
+    Get.offAllNamed("/ArticalListScreen");
   }
   static void goToArticleDetailScreen({required ArticleModel article}) {
     Get.toNamed("/ArticleDetailsScreen",arguments: article);

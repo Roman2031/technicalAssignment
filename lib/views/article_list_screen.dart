@@ -3,7 +3,7 @@ import 'package:technical_assignment/controllers/artical_controller.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:technical_assignment/models/article_model.dart';
-import 'package:technical_assignment/routes/route.dart';
+import 'package:technical_assignment/routes/navigate_route.dart';
 import 'package:technical_assignment/utils/appbar.dart';
 
 class ArticalListScreen extends StatefulWidget {
@@ -46,7 +46,7 @@ class _HomeScreenState extends State<ArticalListScreen> {
                     return Card(
                       child: ListTile(
                         onTap: () => {
-                          Navigate.goToArticleDetailScreen(article: article),
+                          NavigateRoute.goToArticleDetailScreen(article: article),
                         },
                         title: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // ignore: depend_on_referenced_packages
 import 'package:get_storage/get_storage.dart';
-import 'package:technical_assignment/routes/appRoutes.dart';
+import 'package:technical_assignment/routes/all_routes.dart';
 import 'package:technical_assignment/utils/global.dart';
 
 
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       theme: isDarkModeTheme == true ? ThemeData.dark() : ThemeData.light(),
       initialRoute: '/',
-      getPages: appRoutes(token: token),
+      getPages: allRoutes(token: token),
       debugShowCheckedModeBanner: false,
     );
   }

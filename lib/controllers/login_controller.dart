@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:technical_assignment/models/user_model.dart';
 import 'package:technical_assignment/services/login_service.dart';
-import 'package:technical_assignment/routes/route.dart';
+import 'package:technical_assignment/routes/navigate_route.dart';
 import 'package:get_storage/get_storage.dart';
 
 class LoginController extends GetxController {
@@ -30,7 +30,7 @@ class LoginController extends GetxController {
       if (token != null) {
         final getStorage = GetStorage();
         getStorage.write('token', token);
-        Navigate.goToArticleListScreen();
+        NavigateRoute.goToArticleListScreen();
 
         Get.snackbar('Success', 'Token: $token stored successfully');
       } else {

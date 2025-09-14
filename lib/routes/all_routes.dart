@@ -5,7 +5,7 @@ import 'package:technical_assignment/views/article_list_screen.dart';
 import 'package:technical_assignment/views/login_screen.dart';
 import 'package:technical_assignment/views/settings_screen.dart';
 
-List<GetPage<dynamic>>? appRoutes({required String? token}) {
+List<GetPage<dynamic>>? allRoutes({required String? token}) {
   return [    
     GetPage(name: '/', page: () => token != null ? ArticalListScreen(): LoginScreen()),
     GetPage(name: '/ArticalListScreen', page: () => ArticalListScreen()),
