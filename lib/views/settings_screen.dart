@@ -1,10 +1,10 @@
-// ignore_for_file: depend_on_referenced_packages, prefer_const_constructors_in_immutables
+// ignore_for_file: depend_on_referenced_packages, prefer_const_constructors_in_immutables, avoid_print
 import 'package:flutter/material.dart';
 import 'package:technical_assignment/controllers/settings_controller.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:technical_assignment/utils/appbar.dart';
-
+import 'package:technical_assignment/utils/global.dart';
 
 class SettingsScreen extends StatefulWidget {
   SettingsScreen({super.key});
@@ -15,21 +15,23 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   SettingsController controller = Get.put(SettingsController());
+  Global global = Global();
   GetStorage getStorage = GetStorage();
 
   @override
   void initState() {
     super.initState();
-    // ✅ Called once when the widget is created
     controller.isDarkMode.value = getStorage.read('isDarkMode') ?? false;
-    // ignore: avoid_print
-    print("Widget initialized!");
+    controller.isBangla.value = getStorage.read('isBangla') ?? false;
+    setState(() {
+      controller.translateToBangla(text: controller.settingsText);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: 'Settings', showSettings: false),
+      appBar: customAppBar(title: controller.settingsText, showSettings: false),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -43,7 +45,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   controller.onDarkModeChanged(value);
                 },
               ),
-            ),            
+            ),
+            Obx(
+              () => SwitchListTile(
+                activeThumbColor: Colors.teal,
+                title: Text('Bangla'),
+                value: controller.isBangla.value,
+                onChanged: (value) {
+                  controller.onLanguageChanged(value);
+                    setState(() {
+                      controller.translateToBangla(
+                        text: controller.settingsText,
+                      );
+                  });
+                },
+              ),
+            ),
           ],
         ),
       ),

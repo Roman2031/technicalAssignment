@@ -6,7 +6,7 @@ import 'package:technical_assignment/utils/global.dart';
 
 class LoginService {
    Dio dio = Dio();
-  String urlLink = "${endPoint}login";
+  String urlLink = "${Global.endPoint}login";
 
   Future<String?> login({required UserModel userModel}) async {
        dio.options.contentType = Headers.formUrlEncodedContentType;
