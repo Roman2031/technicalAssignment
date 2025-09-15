@@ -40,14 +40,14 @@ dev_dependencies:
     sdk: flutter
   get: ^4.7.2
   dio: ^5.9.0
-  dio_cache_interceptor: ^4.0.3
-  shared_preferences: ^2.5.3
   json_serializable: ^6.11.1
   get_storage: ^2.1.1
   infinite_scroll_pagination: ^5.1.1
   percent_indicator: ^4.2.5
-  bangla_converter: ^1.1.0
   translator: ^1.0.4+1
+  permission_handler: ^12.0.1
+  flutter_pdfview: ^1.4.1+1
+  
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

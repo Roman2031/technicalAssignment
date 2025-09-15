@@ -5,6 +5,7 @@ import 'package:technical_assignment/views/article_details_screen.dart';
 import 'package:technical_assignment/views/article_list_screen.dart';
 import 'package:technical_assignment/views/login_screen.dart';
 import 'package:technical_assignment/views/settings_screen.dart';
+import 'package:technical_assignment/views/show_pdf_screen.dart';
 
 List<GetPage<dynamic>>? allRoutes({required String? token}) {
   return [    
@@ -12,5 +13,6 @@ List<GetPage<dynamic>>? allRoutes({required String? token}) {
     GetPage(name: '/ArticalListScreen', page: () => ArticalListScreen()),
     GetPage(name: '/ArticleDetailsScreen', page: () => ArticleDetailsScreen(article: Get.arguments as ArticleModel)),
     GetPage(name: '/SettingsScreen', page: () => SettingsScreen()),
+    GetPage(name: '/ShowPdfScreen', page: () => ShowPdfScreen(path: Get.arguments as String)),
   ];
 }

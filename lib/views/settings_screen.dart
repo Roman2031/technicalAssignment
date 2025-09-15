@@ -16,7 +16,7 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   SettingsController controller = Get.put(SettingsController());
   Global global = Global();
-  GetStorage getStorage = GetStorage(); 
+  GetStorage getStorage = GetStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +28,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CircularProgressIndicator(),
-              ],
+              children: [CircularProgressIndicator()],
             ); // Show loader
-          } else { 
+          } else {
             return Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
